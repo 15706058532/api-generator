@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.github.15706058532</groupId>
 	<artifactId>api-generator</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.0-RELEASES</version>
 	<name>api-generator</name>
 	<description>在线api文档生成器</description>
 
