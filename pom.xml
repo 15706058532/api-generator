@@ -8,7 +8,7 @@
 		<version>2.1.3.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>io.github.15706058532</groupId>
+	<groupId>com.github.15706058532</groupId>
 	<artifactId>api-generator</artifactId>
 	<version>1.0.0</version>
 	<name>api-generator</name>
