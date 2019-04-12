@@ -1,0 +1,227 @@
+@charset "utf-8";
+body, div {
+    margin: 0;
+    padding: 0;
+}
+
+.body {
+    margin: 0 auto;
+    padding: 0 100px;
+    max-width: 1200px;
+    min-width: 800px;
+}
+
+.text-color-white {
+    height: 35px;
+    width: 55px;
+    color: white;
+}
+
+.body .urls > li > div {
+    text-align: center;
+    line-height: 35px;
+}
+
+ul {
+    list-style: none;
+    padding: 0 20px;
+}
+
+.body .clazz {
+    margin-bottom: 10px;
+    background-color: #ecf2ff;
+}
+
+.body .clazz .clazz-name {
+    font-weight: bold;
+    padding: 20px 0 0 20px;
+}
+
+.body .urls > li {
+    height: 35px;
+    margin-top: 5px;
+    background-color: #9fc2dd;
+}
+
+.body .urls > li .uri, .copy {
+    cursor: pointer;
+}
+
+.body .urls > li .uri:hover {
+    text-decoration: underline
+}
+
+.copy {
+    background-color: #7c8a00;
+    color: white;
+    width: 70px;
+    padding: 0 5px;
+    font-size: 14px;
+}
+
+.success {
+    color: #20ff07;
+}
+
+.body .get {
+    background-color: #288F68;
+}
+
+.body .get-desc {
+    color: #288F68;
+}
+
+.body .post {
+    background-color: #ce8905;
+}
+
+.body .post-desc {
+    color: #ce8905;
+}
+
+.body .put {
+    background-color: #1169C1;
+}
+
+.body .putt-desc {
+    color: #1169C1;
+}
+
+.body .delete {
+    background-color: #C14442;
+}
+
+.body .delete-desc {
+    color: #C14442;
+}
+
+.body .left {
+    float: left;
+}
+
+.body .right {
+    float: right;
+}
+
+.body .uri {
+    float: left;
+    margin-left: 5px;
+}
+
+.body .desc {
+    font-weight: bold;
+    padding-right: 10px;
+    float: right;
+}
+
+.sheet {
+    margin-top: 3px;
+}
+
+.sheet .req {
+    cursor: pointer;
+    float: left;
+    padding: 3px;
+    color: white;
+    background-color: #66de88;
+    border: 1px solid rgb(144, 176, 255);
+    border-bottom: none;
+    border-right: none;
+    border-top-left-radius: 5px;
+}
+
+.content-req {
+    background-color: #66de88;
+
+}
+
+.sheet .resp {
+    cursor: pointer;
+    padding: 3px;
+    color: white;
+    float: left;
+    background-color: #b1a0de;
+    border: 1px solid rgb(144, 176, 255);
+    border-bottom: none;
+    border-top-right-radius: 5px;
+}
+
+.content-resp {
+    background-color: #b1a0de;
+}
+
+.clear {
+    clear: both
+}
+
+.content {
+    margin-top: -1px;
+    border: 1px solid rgb(144, 176, 255);
+}
+
+.format {
+    float: left;
+    margin: 10px 0;
+}
+
+.type {
+    font-weight: bold;
+    float: left;
+    margin: 10px 0;
+}
+
+.param-ul > li {
+    width: 100%;
+}
+
+.req-properties-name, .req-properties-type, .req-properties-must, .req-properties-desc, .req-properties-look {
+    float: left;
+    width: calc((100% - 170px) / 3);
+    text-align: center;
+    line-height: 20px;
+    height: 20px;
+    border: 1px solid black;
+}
+
+.resp-properties-name, .resp-properties-type, .resp-properties-must, .resp-properties-desc, .resp-properties-look {
+    float: left;
+    width: calc((100% - 90px) / 3);
+    text-align: center;
+    line-height: 20px;
+    height: 20px;
+    border: 1px solid black;
+}
+
+.resp-properties-look, .req-properties-look, .resp-properties-must, .req-properties-must {
+    width: 80px;
+}
+
+.detail {
+    cursor: pointer;
+    color: #0f24ff;
+}
+
+.detail:hover {
+    cursor: pointer;
+    color: #ff3941;
+}
+
+.retract {
+    cursor: pointer;
+    color: #0f24ff;
+    padding: 10px;
+}
+
+.retract:hover {
+    cursor: pointer;
+    color: #ff3941;
+    padding: 10px;
+}
+
+.format-list > li {
+    border-bottom: 2px solid black;
+}
+
+.dashed {
+    border-top: 1px dashed black;
+}
