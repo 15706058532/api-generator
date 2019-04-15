@@ -220,11 +220,13 @@ public class LzfApiHandler {
             if (!StringUtils.isEmpty(dataName)) {
                 for (LzfApiProperty lzfApiProperty : lzfApiProperties) {
                     if (Objects.equals(lzfApiProperty.getName(), dataName)) {
-                        lzfApiProperty.setClassName(dataClazz.getName() + (dataClassTypes.length > 0 ? "数组" + (dataClassTypes.length > 1 ? "X" + dataClassTypes.length : "") : ""));
+                        lzfApiProperty.setType(LzfConstance.OBJECT + (dataClassTypes.length > 0 ? "数组" + (dataClassTypes.length > 1 ? "X" + dataClassTypes.length : "") : ""));
+                        lzfApiProperty.setClassName(dataClazz.getName());
                     }
                     if (Objects.equals(lzfApiProperty.getName(), pageName)) {
                         if (!StringUtils.isEmpty(lzfApiProperty.getType())) {
-                            lzfApiProperty.setClassName(dataClazz.getName() + (pageClazzTypes.length > 0 ? "数组" + (pageClazzTypes.length > 1 ? "X" + pageClazzTypes.length : "") : "") + "|" + pageName + ":" + pageClazz.getName());
+                            lzfApiProperty.setType(LzfConstance.OBJECT + (pageClazzTypes.length > 0 ? "数组" + (pageClazzTypes.length > 1 ? "X" + pageClazzTypes.length : "") : "") + "|" + pageName + ":" + pageClazz.getName());
+                            lzfApiProperty.setClassName(dataClazz.getName() + "|" + pageName + ":" + pageClazz.getName());
                         } else {
                             lzfApiProperty.setClassName(pageClazz.getName());
                         }
