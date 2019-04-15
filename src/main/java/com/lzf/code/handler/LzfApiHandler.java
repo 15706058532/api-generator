@@ -189,9 +189,9 @@ public class LzfApiHandler {
         String dataName = null;
         String pageName = null;
         Class<?> dataClazz = null;
-        ClassType[] dataClassTypes;
+        ClassType[] dataClassTypes = new ClassType[0];
         Class<?> pageClazz = null;
-        ClassType[] pageClazzTypes;
+        ClassType[] pageClazzTypes = new ClassType[0];
         for (Annotation annotation : annotations) {
             if (annotation instanceof LzfApiResponse) {
                 LzfApiResponse lzfApiResponse = (LzfApiResponse) annotation;
@@ -220,11 +220,11 @@ public class LzfApiHandler {
             if (!StringUtils.isEmpty(dataName)) {
                 for (LzfApiProperty lzfApiProperty : lzfApiProperties) {
                     if (Objects.equals(lzfApiProperty.getName(), dataName)) {
-                        lzfApiProperty.setClassName(dataClazz.getName());
+                        lzfApiProperty.setClassName(dataClazz.getName() + (dataClassTypes.length > 0 ? "数组" + (dataClassTypes.length > 1 ? "X" + dataClassTypes.length : "") : ""));
                     }
                     if (Objects.equals(lzfApiProperty.getName(), pageName)) {
                         if (!StringUtils.isEmpty(lzfApiProperty.getType())) {
-                            lzfApiProperty.setClassName(dataClazz.getName() + "|" + pageName + ":" + pageClazz.getName());
+                            lzfApiProperty.setClassName(dataClazz.getName() + (pageClazzTypes.length > 0 ? "数组" + (pageClazzTypes.length > 1 ? "X" + pageClazzTypes.length : "") : "") + "|" + pageName + ":" + pageClazz.getName());
                         } else {
                             lzfApiProperty.setClassName(pageClazz.getName());
                         }
