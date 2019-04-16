@@ -14,7 +14,7 @@ const index = {
                 let $descriptionDiv = $("<div class='clazz-desc'></div>");
                 $descriptionDiv.text(description);
                 let $headDiv = $("<div class='clazz-head'></div>");
-                $headDiv.append($nameDiv, $descriptionDiv,$("<div class='clear'></div>"));
+                $headDiv.append($nameDiv, $descriptionDiv, $("<div class='clear'></div>"));
                 let apiMethodList = clazz.apiMethodList;
                 let $urls = $('<ul  class="urls"></ul>');
                 for (let j = 0; j < apiMethodList.length; j++) {
@@ -168,7 +168,7 @@ const index = {
 
     ,
     /**
-     * 请求出参
+     * 响应参数
      * @param target
      * @param type
      */
@@ -205,12 +205,16 @@ const index = {
 
             for (let j = 0; j < data.lzfApiProperties.length; j++) {
                 let lzfApiPropertie = data.lzfApiProperties[j];
-                //name: "serialVersionUID", type: "整数", describe: "serialVersionUID", className: null, must: false
                 let $propertiesLi = $("<li></li>");
                 let $name = $("<div class='resp-properties-name'></div>");
                 $name.text(lzfApiPropertie.name);
                 let $type = $("<div class='resp-properties-type'></div>");
-                $type.text(lzfApiPropertie.type);
+                if (lzfApiPropertie.type.indexOf("|") > 0) {
+                    let typeSplit = lzfApiPropertie.type.split("|");
+                    $type.text(typeSplit[0]);
+                } else {
+                    $type.text(lzfApiPropertie.type);
+                }
                 let $describe = $("<div class='resp-properties-desc'></div>");
                 $describe.text(lzfApiPropertie.describe);
                 let $look = $("<div class='resp-properties-look'></div>");
@@ -305,7 +309,7 @@ const index = {
                 $describe.text(lzfApiPropertie.describe);
                 let $look = $("<div class='" + form + "-properties-look'></div>");
                 if (lzfApiPropertie.className !== null) {
-                    let $detail = $("<div class='  detail-" + form + "'>查看</div>");
+                    let $detail = $("<div class='detail detail-" + form + "'>查看</div>");
                     $look.append($detail);
                     $detail.attr("value", lzfApiPropertie.className)
                 }
