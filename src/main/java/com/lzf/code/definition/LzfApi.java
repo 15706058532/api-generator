@@ -1,6 +1,5 @@
 package com.lzf.code.definition;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -13,20 +12,30 @@ import java.util.List;
  */
 public class LzfApi {
     /**
+     * 类名称
+     */
+    private String clazzName;
+    /**
      * 类描述
      */
     private String description;
     /**
      * 所有的接口
      */
-    private List<LzfApiMethod> apiMethodList = new ArrayList<>();
+    private List<LzfApiMethod> apiMethodList;
 
-    public LzfApi(String description, List<LzfApiMethod> apiMethodList) {
+    public LzfApi(String clazzName, String description, List<LzfApiMethod> apiMethodList) {
+        this.clazzName = clazzName;
         this.description = description;
         this.apiMethodList = apiMethodList;
     }
 
-    public LzfApi() {
+    public String getClazzName() {
+        return clazzName;
+    }
+
+    public void setClazzName(String clazzName) {
+        this.clazzName = clazzName;
     }
 
     public String getDescription() {

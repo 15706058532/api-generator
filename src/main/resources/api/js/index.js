@@ -8,8 +8,13 @@ const index = {
                 let $clazz = $('<div class="clazz"></div>');
                 let clazz = data[i];
                 let description = clazz.description;
-                let $div = $("<div class='clazz-name'></div>");
-                $div.text(description);
+                let clazzName = clazz.clazzName;
+                let $nameDiv = $("<div class='clazz-name'></div>");
+                $nameDiv.text(clazzName);
+                let $descriptionDiv = $("<div class='clazz-desc'></div>");
+                $descriptionDiv.text(description);
+                let $headDiv = $("<div class='clazz-head'></div>");
+                $headDiv.append($nameDiv, $descriptionDiv,$("<div class='clear'></div>"));
                 let apiMethodList = clazz.apiMethodList;
                 let $urls = $('<ul  class="urls"></ul>');
                 for (let j = 0; j < apiMethodList.length; j++) {
@@ -27,9 +32,8 @@ const index = {
                     $description.text(apiMethod.description);
                     $li.append($http, $uri, $copy, $description);
                     $urls.append($li)
-
                 }
-                $clazz.append($div, $urls);
+                $clazz.append($headDiv, $urls);
                 $("#list").append($clazz);
             }
         }, "json")
@@ -97,63 +101,67 @@ const index = {
                 target.next().remove();
                 let $contentt = $("<div class='content'></div>");
                 $contentt.addClass("content-" + type)
-                let $ul = $("<ul class='format-list'></ul>");
-                for (let i = 0; i < data.length; i++) {
-                    let param = data[i];
-                    let $li = $("<li></li>");
-                    let $type = $("<div class='title'><div class='type'>参数形式：</div></div>");
-                    let $format = $("<div class='format'></div>");
-                    $format.text(param.format);
-                    let $retract = $("<div class='right retract'>收起 ⇈</div>");
-                    $type.append($format, $retract);
-                    $li.append($type, $("<div class='clear'></div>"));
-                    let $propertiesUl = $("<ul class='param-ul'></ul>");
-                    if (param.lzfApiProperties.length > 0) {
-                        let $propertiesLi = $("<li></li>");
-                        let $name = $("<div class='req-properties-name'></div>");
-                        $name.text("名称");
-                        if (param.format === "url") {
-                            $name.text("url位置");
+                if (data.length > 0) {
+                    let $ul = $("<ul class='format-list'></ul>");
+                    for (let i = 0; i < data.length; i++) {
+                        let param = data[i];
+                        let $li = $("<li></li>");
+                        let $type = $("<div class='title'><div class='type'>参数形式：</div></div>");
+                        let $format = $("<div class='format'></div>");
+                        $format.text(param.format);
+                        let $retract = $("<div class='right retract'>收起 ⇈</div>");
+                        $type.append($format, $retract);
+                        $li.append($type, $("<div class='clear'></div>"));
+                        let $propertiesUl = $("<ul class='param-ul'></ul>");
+                        if (param.lzfApiProperties.length > 0) {
+                            let $propertiesLi = $("<li></li>");
+                            let $name = $("<div class='req-properties-name'></div>");
+                            $name.text("名称");
+                            if (param.format === "url") {
+                                $name.text("url位置");
+                            }
+                            let $type = $("<div class='req-properties-type'></div>");
+                            $type.text("类型");
+                            let $must = $("<div class='req-properties-must'></div>");
+                            $must.text("是否必须");
+                            let $describe = $("<div class='req-properties-desc'></div>");
+                            $describe.text("描述");
+                            let $look = $("<div class='req-properties-look'></div>");
+                            $look.text("操作");
+                            $propertiesLi.append($name, $type, $describe, $must, $look);
+                            $propertiesUl.append($propertiesLi)
                         }
-                        let $type = $("<div class='req-properties-type'></div>");
-                        $type.text("类型");
-                        let $must = $("<div class='req-properties-must'></div>");
-                        $must.text("是否必须");
-                        let $describe = $("<div class='req-properties-desc'></div>");
-                        $describe.text("描述");
-                        let $look = $("<div class='req-properties-look'></div>");
-                        $look.text("操作");
-                        $propertiesLi.append($name, $type, $describe, $must, $look);
-                        $propertiesUl.append($propertiesLi)
-                    }
 
-                    for (let j = 0; j < param.lzfApiProperties.length; j++) {
-                        let lzfApiPropertie = param.lzfApiProperties[j];
-                        let $propertiesLi = $("<li></li>");
-                        let $name = $("<div class='req-properties-name'></div>");
-                        $name.text(lzfApiPropertie.name);
-                        if (param.format === "url") {
-                            $name.text("{" + lzfApiPropertie.name + "}");
+                        for (let j = 0; j < param.lzfApiProperties.length; j++) {
+                            let lzfApiPropertie = param.lzfApiProperties[j];
+                            let $propertiesLi = $("<li></li>");
+                            let $name = $("<div class='req-properties-name'></div>");
+                            $name.text(lzfApiPropertie.name);
+                            if (param.format === "url") {
+                                $name.text("{" + lzfApiPropertie.name + "}");
+                            }
+                            let $type = $("<div class='req-properties-type'></div>");
+                            $type.text(lzfApiPropertie.type);
+                            let $must = $("<div class='req-properties-must'></div>");
+                            $must.text(lzfApiPropertie.must);
+                            let $describe = $("<div class='req-properties-desc'></div>");
+                            $describe.text(lzfApiPropertie.describe);
+                            let $look = $("<div class='req-properties-look'></div>");
+                            if (lzfApiPropertie.className !== null) {
+                                let $detail = $("<div class='detail detail-req'>查看</div>");
+                                $look.append($detail);
+                                $detail.attr("value", lzfApiPropertie.className)
+                            }
+                            $propertiesLi.append($name, $type, $describe, $must, $look);
+                            $propertiesUl.append($propertiesLi)
                         }
-                        let $type = $("<div class='req-properties-type'></div>");
-                        $type.text(lzfApiPropertie.type);
-                        let $must = $("<div class='req-properties-must'></div>");
-                        $must.text(lzfApiPropertie.must);
-                        let $describe = $("<div class='req-properties-desc'></div>");
-                        $describe.text(lzfApiPropertie.describe);
-                        let $look = $("<div class='req-properties-look'></div>");
-                        if (lzfApiPropertie.className !== null) {
-                            let $detail = $("<div class='detail detail-req'>查看</div>");
-                            $look.append($detail);
-                            $detail.attr("value", lzfApiPropertie.className)
-                        }
-                        $propertiesLi.append($name, $type, $describe, $must, $look);
-                        $propertiesUl.append($propertiesLi)
+                        $li.append($propertiesUl, $("<div class='clear'></div>"));
+                        $ul.append($li);
                     }
-                    $li.append($propertiesUl, $("<div class='clear'></div>"));
-                    $ul.append($li);
+                    $contentt.append($ul);
+                } else {
+                    $contentt.append($("<div class='data-null'>无请求参数</div>"));
                 }
-                $contentt.append($ul);
                 target.after($contentt);
             }, "json");
         }

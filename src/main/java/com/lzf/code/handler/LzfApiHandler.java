@@ -12,6 +12,7 @@ import com.lzf.code.definition.LzfApiMethod;
 import com.lzf.code.definition.LzfApiParam;
 import com.lzf.code.definition.LzfApiProperty;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +38,8 @@ public class LzfApiHandler {
     private LzfApiContext lzfApiContext;
     @Autowired
     private LzfApiStorage lzfApiStorage;
+    @Value("${server.servlet.context-path:}")
+    private String contextPath;
 
     /**
      * 解析类
@@ -54,8 +57,8 @@ public class LzfApiHandler {
                     RequestMapping requestMapping = (RequestMapping) annotation;
                     valueArr = requestMapping.value();
                 } else if (annotation instanceof LzfApiDescribe) {
-                    LzfApiDescribe LzfApiDescribe = (LzfApiDescribe) annotation;
-                    description = LzfApiDescribe.value();
+                    LzfApiDescribe lzfapidescribe = (LzfApiDescribe) annotation;
+                    description = lzfapidescribe.value();
                 }
             }
             Method[] methods = restControllerClass.getMethods();
@@ -66,10 +69,10 @@ public class LzfApiHandler {
             if (StringUtils.isEmpty(description.trim()) && lzfApiMethods.isEmpty()) {
                 continue;
             }
+            String clazzName = restControllerClass.getSimpleName();
             if (StringUtils.isEmpty(description.trim())) {
-                description = restControllerClass.getSimpleName();
             }
-            lzfApiList.add(new LzfApi(description, lzfApiMethods));
+            lzfApiList.add(new LzfApi(clazzName, description, lzfApiMethods));
         }
         lzfApiStorage.setLzfApiList(lzfApiList);
     }
@@ -116,8 +119,8 @@ public class LzfApiHandler {
             for (String methodValue : methodValueAddr) {
                 for (String requestType : requestTypes) {
                     //把uri和方法对应关系保存起来
-                    lzfApiStorage.addUriMapping(requestType + value + methodValue, method);
-                    LzfApiMethod lzfApiMethod = new LzfApiMethod(requestType, value + methodValue, methodDescribe);
+                    lzfApiStorage.addUriMapping(requestType + contextPath + value + methodValue, method);
+                    LzfApiMethod lzfApiMethod = new LzfApiMethod(requestType, contextPath + value + methodValue, methodDescribe);
                     lzfApiMethods.add(lzfApiMethod);
                 }
             }

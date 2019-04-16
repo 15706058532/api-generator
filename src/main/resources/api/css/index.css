@@ -33,6 +33,13 @@ ul {
 }
 
 .body .clazz .clazz-name {
+    float: left;
+    font-weight: bold;
+    padding: 20px 0 0 20px;
+}
+.body .clazz .clazz-desc {
+    float: left;
+    color: #8b7545;
     font-weight: bold;
     padding: 20px 0 0 20px;
 }
@@ -224,4 +231,9 @@ ul {
 
 .dashed {
     border-top: 1px dashed black;
+}
+.data-null{
+    text-align: center;
+    padding: 20px;
+    color: #0010a6;;
 }
