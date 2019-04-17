@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="/api/css/login.css"/>
+    <title>登录</title>
+</head>
+<body>
+<div class="body">
+    <form class="form" action="/api/login" method="post">
+        <ul>
+            <li class="title">
+                <div>Api在线文档</div>
+            </li>
+            <li>
+                <label for="username"> 登录名：</label><input id="username" th:value="${username} " name="username"/>
+            </li>
+            <li>
+                <label for="password">密码:</label> <input id="password" th:value="${password}" type="password"
+                                                         name="password"/>
+            </li>
+            <li class="msg">
+                <div th:text="${msg}"></div>
+            </li>
+            <li class="submit">
+                <input class="submit-button" type="submit" th:value="登录">
+            </li>
+        </ul>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+@charset "utf-8";
+* {
+    padding: 0;
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+.body {
+    text-align: center;
+    background-color: #589a76;
+    width: 500px;
+    height: 302px;
+    margin: 10% auto 0;
+}
+
+.body .form {
+    padding-top: 40px;
+}
+.body input{
+    height: 25px;
+}
+.body li {
+    width: 100%;
+    margin-top: 20px;
+    float: right;
+    margin-right: 150px;
+    text-align: right;
+}
+
+.body .title {
+    margin-right: 220px;
+    text-align: right;
+}
+
+.body .submit {
+    margin-right: 230px;
+    text-align: right;
+}
+.submit .submit-button{
+    width: 70px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.body .msg {
+    color: red;
+    margin-right: 200px;
+}
+
