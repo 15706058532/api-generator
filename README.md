@@ -21,7 +21,7 @@
           <dependency>
           <groupId>com.github.15706058532</groupId>
           <artifactId>api-generator</artifactId>
-          <version>1.2.0</version>
+          <version>1.3.0</version>
           </dependency>
          ```
 
@@ -105,6 +105,8 @@
                //拦截器的执行顺序
                .order(3);
       ```
+
+   2. 出于安全的考虑，该项目在`v1.3.0`版本后添加了登录才能访问api列表的功能
 
 5. #### 注解介绍
 
@@ -252,20 +254,19 @@
               demoResult.setData(demoPage);
               return demoResult;
           }
-         
          ```
 
-
-   6. #### 配套工具
+6. #### 配套工具
 
       使用[数据库逆向生成工具](https://github.com/15706058532/db-reverse-java)可以方便的根据数据库的表自动生成带有api注解的实体类
 
       [点击直接下载数据库逆向生成工具](https://raw.githubusercontent.com/15706058532/db-reverse-java/master/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%80%86%E5%90%91%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7-3.2.0.jar)
 
-## 联系方式
+7. #### 联系方式
 
-##### 使用过程中有什么问题、建议或意见可通过下面的方式联系我
+      **使用过程中有什么问题、建议或意见可通过下面的方式联系我**
 
-QQ：964210628
+      QQ：**964210628**
 
-Email：[15706058532@163.com](mailto:15706058532@163.com)
+      Email：**[15706058532@163.com](mailto:15706058532@163.com)**
+
