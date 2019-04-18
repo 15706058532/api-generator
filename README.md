@@ -21,7 +21,7 @@
           <dependency>
           <groupId>com.github.15706058532</groupId>
           <artifactId>api-generator</artifactId>
-          <version>1.3.0</version>
+          <version>1.3.1</version>
           </dependency>
          ```
 
