@@ -14,9 +14,16 @@ import java.lang.annotation.*;
 @Documented
 public @interface LzfApiRequest {
     /**
-     *  请求类
+     * 必须字段数组   *表示全部
+     *
+     * @return
      */
-    Class[] reqClass();
+    String[] musts() default {};
 
-    String[] mustProperty() default {};
+    /**
+     * 非必须字段数组 *表示全部
+     *
+     * @return
+     */
+    String[] noMusts() default {};
 }

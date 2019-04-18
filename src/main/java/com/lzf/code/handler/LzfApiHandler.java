@@ -128,8 +128,29 @@ public class LzfApiHandler {
         return lzfApiMethods;
     }
 
+    /**
+     * 解析请求参数
+     *
+     * @param uri
+     * @return
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public List<LzfApiParam> doAnalysisMethodParam(String uri) throws IOException, ClassNotFoundException {
         Method method = lzfApiStorage.getMethodByUri(uri);
+        Annotation[] annotations = method.getAnnotations();
+        //必须的类
+        String[] musts = new String[0];
+        //非必须的类
+        String[] noMusts = new String[0];
+        for (Annotation annotation : annotations) {
+            if (annotation instanceof LzfApiRequest) {
+                //@LzfApiRequest配置的优先级要高于@LzfApiDescribe
+                LzfApiRequest lzfApiRequest = (LzfApiRequest) annotation;
+                musts = lzfApiRequest.musts();
+                noMusts = lzfApiRequest.noMusts();
+            }
+        }
         Type[] genericParameterTypes = method.getGenericParameterTypes();
         Annotation[][] parameterAnnotations = method.getParameterAnnotations();
         LzfParameterNameDiscoverer discoverer = new LzfParameterNameDiscoverer();
@@ -147,6 +168,43 @@ public class LzfApiHandler {
         String jsonFormat = null;
         for (int i = 0; i < parameterNames.length; i++) {
             LzfApiParam lzfApiParam = doAnalysisProperty(parameterAnnotations[i], genericParameterTypes[i], parameterNames[i]);
+            List<String> mustList = Arrays.asList(musts);
+            List<String> noMustList = Arrays.asList(noMusts);
+            List<LzfApiProperty> removeList = new ArrayList<>();
+            if (musts.length > 0 && noMusts.length > 0) {
+                //将配置了必填属性和非必填属性的保留其他的移除   *表示全部保留
+                //必填的must设置为true   非必填的must设置为false
+                for (LzfApiProperty lzfApiProperty : lzfApiParam.getLzfApiProperties()) {
+                    //必填字段由于非必填字段
+                    if (mustList.contains(LzfSymbolConstant.ASTERISK) || mustList.contains(lzfApiProperty.getName())) {
+                        lzfApiProperty.setMust(true);
+                    } else if (noMustList.contains(LzfSymbolConstant.ASTERISK) || noMustList.contains(lzfApiProperty.getName())) {
+                        lzfApiProperty.setMust(false);
+                    } else {
+                        removeList.add(lzfApiProperty);
+                    }
+                }
+            } else if (musts.length > 0) {
+                //必填的must设置为true  *表示全部保留 未配置的移除
+                for (LzfApiProperty lzfApiProperty : lzfApiParam.getLzfApiProperties()) {
+                    if (mustList.contains(LzfSymbolConstant.ASTERISK) || mustList.contains(lzfApiProperty.getName())) {
+                        lzfApiProperty.setMust(true);
+                    } else {
+                        removeList.add(lzfApiProperty);
+                    }
+                }
+            } else if (noMusts.length > 0) {
+                //非必填的must设置为false, *表示全部保留 未配置的移除
+                for (LzfApiProperty lzfApiProperty : lzfApiParam.getLzfApiProperties()) {
+                    if (noMustList.contains(LzfSymbolConstant.ASTERISK) || noMustList.contains(lzfApiProperty.getName())) {
+                        lzfApiProperty.setMust(false);
+                    } else {
+                        removeList.add(lzfApiProperty);
+                    }
+                }
+            }
+            lzfApiParam.getLzfApiProperties().removeAll(removeList);
+
             if (Objects.equals(lzfApiParam.getFormat(), LzfConstance.FORM_DATA)) {
                 formDataLzfApiProperties.addAll(lzfApiParam.getLzfApiProperties());
                 formDataFormat = lzfApiParam.getFormat();
@@ -244,12 +302,22 @@ public class LzfApiHandler {
         return lzfApiParam;
     }
 
+    /**
+     * 请求参数解析
+     *
+     * @param annotations
+     * @param genericParameterType
+     * @param properTyName
+     * @return
+     * @throws ClassNotFoundException
+     */
     private LzfApiParam doAnalysisProperty(Annotation[] annotations, Type genericParameterType, String properTyName) throws ClassNotFoundException {
         LzfApiParam lzfApiParam = new LzfApiParam();
         String format = LzfConstance.FORM_DATA;
         String describe = "";
         String pattern = null;
         boolean must = false;
+
         for (Annotation annotation : annotations) {
             if (annotation instanceof RequestBody) {
                 format = LzfConstance.JSON;
