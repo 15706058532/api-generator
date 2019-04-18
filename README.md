@@ -199,7 +199,53 @@
           }
          ```
 
-   3. **`@LzfApiResponse`**
+   3. **`@LzfApiRequest`**
+
+      **使用说明：**  在方法上使用
+
+      **功能： ** 用来配置前端入参参数属性的配置，减少不必要的属性
+
+      **参数说明：** `musts`={必须的属性多个逗号隔开，\*代表全部}， `noMusts`={非必须的属性多个逗号隔开，\*代表全部}，musts的优先级高于noMusts
+
+      **示例：**
+
+      1. 无配置
+
+         ```java
+         @LzfApiRequest()
+         public TestUserReq[][] testFunction12(@RequestBody TestUserReq[][] testUserReq) {
+             return testUserReq;
+         }
+         ```
+
+      2. 全部必须 musts={"\*"} 
+
+         ```java
+         @LzfApiRequest(musts = {"*"})
+         public List<List<TestUserReq>> testFunction12(@RequestBody List<List<TestUserReq>> testUserReqs) {
+             return testUserReqs;
+         }
+         ```
+
+      3. 全部非必须  noMusts = {"\*"}
+
+         ```java
+         @LzfApiRequest(noMusts = {"*"})
+         public Collection<List<List<TestUserReq>>> testFunction12(@RequestBody Collection<List<List<TestUserReq>>> testUserReqs) {
+             return testUserReqs;
+         }
+         ```
+
+      4. musts={"id","name"},noMusts = {"createTime","updateTime"}
+
+         ```java
+         @LzfApiRequest(musts = {"id","name"}, noMusts = {"createTime","updateTime"})
+         public TestUserReq testFunction13(@PathVariable(value = "id") Integer id, @PathVariable(value = "name") String name, TestUserReq userReq, TestReq testReq, @RequestBody TestUserReq testUserReq) {
+             return testUserReq;
+         }
+         ```
+
+   4. **`@LzfApiResponse`**
 
       **使用说明：** 在方法上使用
 
