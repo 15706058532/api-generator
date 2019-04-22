@@ -35,13 +35,14 @@ ul {
 .body .clazz .clazz-name {
     float: left;
     font-weight: bold;
-    padding: 20px 0 0 20px;
+    padding: 10px 0 0 20px;
 }
+
 .body .clazz .clazz-desc {
     float: left;
     color: #8b7545;
     font-weight: bold;
-    padding: 20px 0 0 20px;
+    padding: 10px 0 0 20px;
 }
 
 .body .urls > li {
@@ -213,13 +214,13 @@ ul {
     color: #ff3941;
 }
 
-.retract {
+.retract, .ul-retract {
     cursor: pointer;
     color: #0f24ff;
     padding: 10px;
 }
 
-.retract:hover {
+.retract:hover, .ul-retract:hover {
     cursor: pointer;
     color: #ff3941;
     padding: 10px;
@@ -232,8 +233,13 @@ ul {
 .dashed {
     border-top: 1px dashed black;
 }
-.data-null{
+
+.data-null {
     text-align: center;
     padding: 20px;
     color: #0010a6;;
+}
+
+.ul-hide {
+    display: none;
 }

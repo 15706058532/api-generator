@@ -14,9 +14,9 @@ const index = {
                 let $descriptionDiv = $("<div class='clazz-desc'></div>");
                 $descriptionDiv.text(description);
                 let $headDiv = $("<div class='clazz-head'></div>");
-                $headDiv.append($nameDiv, $descriptionDiv, $("<div class='clear'></div>"));
+                $headDiv.append($nameDiv, $descriptionDiv,$("<div class='right ul-retract'>展开 ⇊</div>"), $("<div class='clear'></div>"));
                 let apiMethodList = clazz.apiMethodList;
-                let $urls = $('<ul  class="urls"></ul>');
+                let $urls = $('<ul  class="urls ul-hide"></ul>');
                 for (let j = 0; j < apiMethodList.length; j++) {
                     let apiMethod = apiMethodList[j];
                     let $li = $('<li class="uri-li"></li>');
@@ -79,6 +79,15 @@ const index = {
                 $(this).text("收起 ⇈");
             } else {
                 $(this).parent().next().next().hide();
+                $(this).text("展开 ⇊");
+            }
+        });
+        $(document).on("click", ".ul-retract", function (e) {
+            if ($(this).parent().next().is(":hidden")) {
+                $(this).parent().next().show();
+                $(this).text("收起 ⇈");
+            } else {
+                $(this).parent().next().hide();
                 $(this).text("展开 ⇊");
             }
         });
