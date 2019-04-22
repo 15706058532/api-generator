@@ -27,8 +27,8 @@ ul {
     padding: 0 20px;
 }
 
-.body .clazz {
-    margin-bottom: 10px;
+ .clazz {
+    margin: 10px 0;
     background-color: #ecf2ff;
 }
 
@@ -36,6 +36,10 @@ ul {
     float: left;
     font-weight: bold;
     padding: 10px 0 0 20px;
+}
+.clazz-name:hover{
+    cursor: pointer;
+    text-decoration: underline
 }
 
 .body .clazz .clazz-desc {

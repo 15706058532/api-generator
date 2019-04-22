@@ -91,6 +91,15 @@ const index = {
                 $(this).text("展开 ⇊");
             }
         });
+        $(document).on("click", ".clazz-name", function (e) {
+            if ($(this).parent().next().is(":hidden")) {
+                $(this).parent().next().show();
+                $(this).next().next().text("收起 ⇈");
+            } else {
+                $(this).parent().next().hide();
+                $(this).next().next().text("展开 ⇊");
+            }
+        });
         $(document).on("click", ".goto", function (e) {
             index.goto($(this))
         });
