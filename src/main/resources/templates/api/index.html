@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html xmlns:th="http://www.thymeleaf.org" lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <title>api接口文档</title>
-    <script src="api/js/jquery.min.js"></script>
-    <script src="api/js/index.js"></script>
-    <link type="text/css" rel="stylesheet" href="api/css/index.css"/>
+    <script th:src="@{ '/api/js/jquery.min.js'}"></script>
+    <script th:src="@{ '/api/js/jquery.min.js'}"></script>
+    <script th:src="@{ '/api/js/index.js'}"></script>
+    <link type="text/css" rel="stylesheet" th:href="@{ '/api/css/index.css'}"/>
 </head>
 <body>
 <div class="body" id="list">

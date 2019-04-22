@@ -26,19 +26,30 @@ public class LzfApiIndexController {
     @Value("${api-password:cleancode}")
     private String apiPassword;
 
-    @GetMapping("api")
+    @GetMapping("/api")
     public String apiIndex(HttpSession session) {
         if (StringUtils.isEmpty(apiUsername) || StringUtils.isEmpty(apiPassword)) {
-            return "api/index";
+            return "/api/index";
         }
         if (Objects.isNull(session.getAttribute("api-user-info"))) {
-            return "api/login";
+            return "/api/login";
         }
-        return "api/index";
+        return "/api/index";
     }
 
-    @PostMapping("api/login")
-    public String apiLogin(HttpSession session,  String username, String password, Model model) {
+    @PostMapping("/api")
+    public String index(HttpSession session) {
+        if (StringUtils.isEmpty(apiUsername) || StringUtils.isEmpty(apiPassword)) {
+            return "/api/index";
+        }
+        if (Objects.isNull(session.getAttribute("api-user-info"))) {
+            return "/api/login";
+        }
+        return "/api/index";
+    }
+
+    @PostMapping("/api/login")
+    public String apiLogin(HttpSession session, String username, String password, Model model) {
         if (apiUsername.equals(username) && apiPassword.equals(password)) {
             session.setAttribute("api-user-info", true);
             return "redirect:/api";
@@ -46,6 +57,6 @@ public class LzfApiIndexController {
         model.addAttribute("username", username);
         model.addAttribute("password", password);
         model.addAttribute("msg", "用户名或密码错误");
-        return "api/login";
+        return "/api/login";
     }
 }
